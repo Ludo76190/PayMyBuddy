@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay My Buddy</title>
+    <link th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}" th:rel="stylesheet">
+</head>
+<body>
+<div th:replace="menu"></div>
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Transaction</li>
+        </ol>
+    </nav>
+    <div>
+        <h3>Votre solde est de <span th:text="${balance}">Balance</span> €</h3>
+    </div>
+    <h3>Send Money to a friend</h3>
+    <div>
+        <form method="post" th:action="@{/saveSendTransaction}">
+            <select name="mail" required>
+                <option value="" disabled selected>Select A Friend</option>
+                <option th:each="friend :${friends}" th:value="${friend.Email}" th:text="${friend.Email}"></option>
+            </select>
+            <input type="number" name="amount" step=".01" placeholder="0€" required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <div>
+        <h3 class="d-inline-block">Transaction</h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Sender</th>
+                <th>Receiver</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${listTransactionsSenderReceiver.empty}">
+                <td colspan="3">No transaction saved</td>
+            </tr>
+            <tr th:each="transaction: ${listTransactionsSenderReceiver}">
+                <td><span th:text="${transaction.dateTransaction}"></span></td>
+                <td><span th:text="${transaction.sender.email}"></span></td>
+                <td><span th:text="${transaction.receiver.email}"></span></td>
+                <td><span th:text="${transaction.amount}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5 </a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>

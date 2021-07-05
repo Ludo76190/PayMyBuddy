@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay My Buddy</title>
+    <link th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}" th:rel="stylesheet">
+</head>
+<body>
+    <div th:replace="menu"></div>
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Transfert</li>
+            </ol>
+        </nav>
+        <h3>Votre solde est de <span th:text="${balance}">Balance</span> €</h3>
+        <h3>Add Money</h3>
+        <div>
+            <form method="post" th:action="@{/saveGetTransfert}">
+                <select name="rib" required>
+                    <option value="" disabled selected>Select A RIB</option>
+                    <option th:each="bankaccount :${listBankAccount}" th:value="${bankaccount.rib}" th:text="${bankaccount.rib}" ></option>
+                </select>
+                <input type="number" name="amount" step=".01" placeholder="0€" required>
+                <button type="submit" class="btn btn-primary" value="Get">Get</button>
+            </form>
+        </div>
+        <h3>Send Money</h3>
+        <div>
+            <form method="post" th:action="@{/saveSendTransfert}">
+                <select name="rib" required>
+                    <option value="" disabled selected>Select A RIB</option>
+                    <option th:each="bankaccount :${listBankAccount}" th:value="${bankaccount.rib}" th:text="${bankaccount.rib}" ></option>
+                </select>
+                <input type="number" name="amount" step=".01" placeholder="0€" required>
+                <button type="submit" class="btn btn-primary" value="Send">Send</button>
+            </form>
+        </div>
+        <h3 class="d-inline-block">Transferts</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>RIB</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:if="${listTransferts.empty}">
+                    <td colspan="3">No transfert saved</td>
+                </tr>
+                <tr th:each="transfert: ${listTransferts}">
+                    <td><span th:text="${transfert.dateTransfert}"></span></td>
+                    <td><span th:text="${transfert.bankAccount.rib}"></span></td>
+                    <td><span th:text="${transfert.type}"></span></td>
+                    <td><span th:text="${transfert.amount}"></span></td>
+                </tr>
+            </tbody>
+        </table>
+        <nav aria-label="navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item"><a class="page-link" href="#">5 </a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>

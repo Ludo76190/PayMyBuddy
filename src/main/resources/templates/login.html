@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Login to Pay My Buddy</title>
+        <link th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}" th:rel="stylesheet">
+    </head>
+    <body>
+        <div class="container-fluid text-center">
+            <div>
+                <img class="img-fluid" th:src="@{../images/PayMyBuddy.JPG}" />
+            </div>
+            <div>
+                <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto;">
+
+                    <div class="border border-secondary p-3 rounded">
+                        <p>Access to Pay My Buddy</p>
+                        <p>
+                            <input type="email" name="mail" class="form-control" placeholder="E-mail" required autofocus/>
+                        </p>
+                        <p>
+                            <input type="password" name="password" class="form-control" placeholder="Password" required />
+                        </p>
+                        <p>
+                            <input type="submit" value="Login" class="btn btn-primary" />
+                        </p>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <a class="nav-link active" th:href="@{/registration}">Registration</a>
+            </div>
+        </div>
+    </body>
+</html>

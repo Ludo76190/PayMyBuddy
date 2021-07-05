@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pay My Buddy</title>
+        <link th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}" th:rel="stylesheet">
+    </head>
+    <body>
+        <div th:replace="menu"></div>
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                </ol>
+            </nav>
+            <H3>Add RIB</H3>
+            <form method="post" th:action="@{/addBankAccount}">
+                <div class="form-group">
+                    <label for="rib">RIB</label>
+                    <input type="text" id="rib" name="rib" placeholder="Enter the rib of the bank account" required>
+                    <button type="submit" class="btn btn-primary" value="Add">Add</button>
+                </div>
+            </form>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>RIB</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${listBankAccount.empty}">
+                        <td>No bank account saved</td>
+                    </tr>
+                    <tr th:each="bankAccount: ${listBankAccount}">
+                        <td><span th:text="${bankAccount.rib}"> RIB </span></td>
+                        <td>
+                            <a th:href="@{/deleteBankAccount/{id}(id=${bankAccount.id})}">
+                                <button class="btn btn-danger">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+  <meta charset="UTF-8">
+  <title>Pay My Buddy</title>
+  <link th:href="@{/webjars/bootstrap/5.0.1/css/bootstrap.min.css}" th:rel="stylesheet">
+</head>
+<body>
+<div th:replace="menu"></div>
+<div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Home</li>
+    </ol>
+  </nav>
+  <h1>Bienvenue sur Pay My Buddy <span th:text="${userFirstName}">FirstName</span> <span th:text="${userLastName}">LastName</span></h1>
+  <h3>Votre solde est de <span th:text="${balance}">Balance</span> €</h3>
+</div>
+</body>
+</html>
