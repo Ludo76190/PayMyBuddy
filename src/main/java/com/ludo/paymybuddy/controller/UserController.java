@@ -21,6 +21,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * gestion des urls :
+ *  post : /user_registration pour enregistrer l'utilisateur
+ *  post : /home/addContact pour sauvegarder les contacts de l'utilisateur
+ *  get : /home pour afficher la page d'accueil
+ *  get : /home/profile pour afficher le profil de l'utilisateur
+ *  get : /home/contact" pour afficher les contacts de l'utilisateur
+ *  get : /deleteContact/{id} pour supprimer un contact de l'utilisateur
+ *
+ */
+
 @Controller
 public class UserController {
 
@@ -36,14 +47,17 @@ public class UserController {
     public String registration(@Valid User user, BindingResult bindingResult){
 
         if (bindingResult.hasErrors()){
+            logger.info("erreur lors de la saisie du formulaire");
             return "registration";
         }
+        logger.info("Enregistrement du user");
         userService.saveUser(user);
+        logger.info("user enregistré");
         return "redirect:/login";
     }
 
     @GetMapping("/home")
-    public String home(@AuthenticationPrincipal MyUserDetails userDetails, Model model){
+    public String home(@AuthenticationPrincipal Model model){
         logger.info("Affichage de la page d'accueil de l'utilisateur");
 
         User user = userService.getCurrentUser();
@@ -75,8 +89,8 @@ public class UserController {
 
     @PostMapping("/home/addContact")
     public String addFriend(@RequestParam(value = "friendMail") String friendMail, HttpServletResponse response) {
-
         User addFriend = userService.addFriend(friendMail);
+        logger.info("ajout de l'utisateur " + addFriend.getEmail() +" en ami");
 
         if (addFriend != null) {
             logger.info("SUCCESS - addFriend POST request - Person " + friendMail);

@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * gestion des urls :
+ *  post : /saveSendTransaction pour sauvegarder la transaction
+ *  get : /home/transaction pour afficher la page des transactions
+ */
+
 @Controller
 public class TransactionController {
 
@@ -48,8 +54,8 @@ public class TransactionController {
     public String saveSendTransaction(@RequestParam(value = "mail") String mail, @RequestParam(value = "amount") double amount) {
 
         logger.info("Sauvegarde de la transaction");
-
         transactionService.saveTransaction(mail, amount);
+        logger.info("Sauvegarde de la transaction terminée");
 
         return "redirect:/home/transaction";
     }

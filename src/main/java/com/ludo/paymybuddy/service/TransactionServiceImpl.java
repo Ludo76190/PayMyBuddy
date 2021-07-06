@@ -42,10 +42,8 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setDateTransaction(LocalDate.now());
         transaction.setTaxe(Taxe.TAXE_RATE);
 
-        logger.info("transaction="+transaction);
-
         if (sender.getBalance() >= transaction.getAmount() + (transaction.getAmount() * Taxe.TAXE_RATE)) {
-
+            logger.info("Sauvegarde de la transaction = "+transaction.getId());
             receiver.setBalance(receiver.getBalance() + transaction.getAmount());
             userRepository.save(receiver);
 
@@ -53,6 +51,7 @@ public class TransactionServiceImpl implements TransactionService {
             userRepository.save(sender);
 
         } else {
+            logger.info("Sauvegarde de la transaction = "+transaction.getId() + " impossible");
             return null;
         }
 
@@ -61,6 +60,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public List<Transaction> getTransactions(User user) {
+        logger.info("Recherche de la liste des transactions");
         return transactionRepository.findAllBySenderOrReceiverOrderByDateTransaction(user, user);
     }
 }

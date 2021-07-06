@@ -23,11 +23,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserService userService;
 
-//    @Override
-//    public void save(User user) {
-//        userRepository.save(user);
-//    }
-
     @Override
     public User getCurrentUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -40,34 +35,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(username);
     }
 
-//    public List<User> getUsers() {
-//        return userRepository.findAll();
-//    }
-
-//    public User getUser(int id) {
-//        return userRepository.findById(id);
-//    }
-
-//    @Override
-//    public User findByLastName(String lastName) {
-//        User user = userRepository.findByLastname(lastName);
-//        if (user == null) {
-//            return null;
-//        }
-//        return user;
-//    }
-
     @Override
     public User findByEmail(String email) {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            return null;
-        }
-        return user;
-    }
-
-    public void deleteUser(int id) {
-        userRepository.deleteById(id);
+        logger.info("Recherche du user pour l'email " + email);
+        return userRepository.findByEmail(email);
     }
 
     public User saveUser(User user) {
@@ -82,21 +53,18 @@ public class UserServiceImpl implements UserService {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
+        logger.info("sauvegarde du user " + user.getId());
         userRepository.save(user);
 
         return user;
     }
-
-//    public User updateUser(User user) {
-//        return userRepository.save(user);
-//    }
 
     @Override
     public User addFriend(String friendEmail) {
 
         User owner = userService.getCurrentUser();
         if (owner.getEmail().equals(friendEmail)) {
-            logger.error("Failed- Same mail: ");
+            logger.error("Failed- Same mail");
             return null;
         }
 
@@ -113,6 +81,7 @@ public class UserServiceImpl implements UserService {
 
         owner.getFriends().add(friend);
 
+        logger.info("Sauvegarde du user " + owner.getId());
         return userRepository.save(owner);
     }
 
@@ -122,6 +91,7 @@ public class UserServiceImpl implements UserService {
         List<User> friends = owner.getFriends();
         friends.removeIf(u -> u.getId().equals(friendID));
 
+        logger.info("Suppression du user " + owner.getId());
         userRepository.save(owner);
 
     }

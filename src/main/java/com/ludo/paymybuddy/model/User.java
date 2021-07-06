@@ -10,6 +10,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * La classe User contient les informations utilisateur de Pay My Buddy.
+ */
+
 @Entity
 @Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PUBLIC)

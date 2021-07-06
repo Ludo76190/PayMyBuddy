@@ -37,11 +37,13 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public List<BankAccount> getAllUserBankAccountById(Integer id) {
+        logger.info("Recherche du bankAccount pour le userId " + id);
         return bankAccountRepository.findAllBankAccountByUserId(id);
     }
 
     @Override
     public void deleteBankAccountById(Integer id) {
+        logger.info("Suppression du bankAccount pour le userId " + id);
         bankAccountRepository.deleteById(id);
     }
 

@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * gestion des urls :
+ *  post : /addBankAccount pour ajouter un compte banquaire
+ *  get : /deleteBankAccount/{id} pour supprimer un compte bancaire
+ */
+
 @Controller
 public class BankAccountController {
 
@@ -22,6 +28,7 @@ public class BankAccountController {
     public String saveBankAccount(@RequestParam(value = "rib") String rib){
         logger.info("Sauvegarde du BankAccount");
         bankAccountService.saveBankAccount(rib);
+        logger.info("Sauvegarde du BankAccount terminée");
         return "redirect:/home/profile";
     }
 
@@ -29,6 +36,7 @@ public class BankAccountController {
     public String deleteUserBankAccount(@PathVariable(name = "id") Integer id){
         logger.info("Suppression du BankAccount");
         bankAccountService.deleteBankAccountById(id);
+        logger.info("BankAccount supprimé");
         return "redirect:/home/profile";
     }
 

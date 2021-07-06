@@ -7,6 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * gestion des urls :
+ *  get : / pour afficher la page de login
+ *  get : /registration pour afficher le formulaire d'enregistrement
+ */
+
 @Controller
 public class HomeController {
 

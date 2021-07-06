@@ -8,6 +8,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * La classe Transaction contient les transactions enregistrées pour chaque connexion.
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor

@@ -20,6 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * gestion des urls :
+ *  post : /saveGetTransfert pour sauvegarder le transfert depuis la banque
+ *  post : /saveSendTransfert pour sauvegarder le transfert vers la banque
+ *  get : /home/transfert pour afficher la page des transfert
+ */
+
 @Controller
 public class TransfertController {
 
@@ -61,6 +68,7 @@ public class TransfertController {
 
         String type = "Approvisionnement";
         transfertService.saveTransfert(rib, amount, type);
+        logger.info("Sauvegarde du transfert en Approvisionnement terminé");
 
         return "redirect:/home/transfert";
     }
@@ -73,9 +81,9 @@ public class TransfertController {
         String type = "Versement";
         transfertService.saveTransfert(rib, amount, type);
 
+        logger.info("Sauvegarde du transfert en Versement terminé");
+
         return "redirect:/home/transfert";
     }
-
-
 
 }

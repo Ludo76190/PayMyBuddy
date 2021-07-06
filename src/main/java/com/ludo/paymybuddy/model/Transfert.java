@@ -7,6 +7,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 
+/**
+ * La classe Transfert contient les transfert enregistrées pour chaque connexion.
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor

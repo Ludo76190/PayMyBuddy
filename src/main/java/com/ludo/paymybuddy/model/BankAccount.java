@@ -8,6 +8,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * La classe BankAccount définit les comptes disponibles pour l'utilisateur.
+ */
+
 @Getter
 @Setter
 @Entity

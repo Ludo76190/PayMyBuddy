@@ -44,7 +44,6 @@ public class TransfertServiceImpl implements TransfertService {
     public void saveTransfert(String rib, Double amount, String type) {
 
         User user = userService.getCurrentUser();
-        logger.info("user="+user.getEmail());
 
         BankAccount bankAccount = bankAccountRepository.findByRib(rib);
 
@@ -56,7 +55,7 @@ public class TransfertServiceImpl implements TransfertService {
 
         if (transfert.getType().equals("Approvisionnement")) {
             user.setBalance(user.getBalance() + transfert.getAmount());
-            logger.info("Approvisionnement du compte");
+            logger.info("Approvisionnement du compte pour le user "+user.getId());
             userRepository.save(user);
         } else if (transfert.getType().equals("Versement") && user.getBalance() >= transfert.getAmount()) {
             logger.info("transfert d'argent vers un le compte "+ bankAccount.getRib());
@@ -66,11 +65,7 @@ public class TransfertServiceImpl implements TransfertService {
             logger.info("problème lors du transfert d'argent");
             return;
         }
-        logger.info("id="+transfert.getId());
-        logger.info("amount="+transfert.getAmount());
-        logger.info("date="+transfert.getDateTransfert());
-        logger.info("type="+transfert.getType());
-        logger.info("bank="+transfert.getBankAccount());
+
         transfertRepository.save(transfert);
     }
 
