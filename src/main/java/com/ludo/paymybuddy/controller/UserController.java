@@ -90,7 +90,6 @@ public class UserController {
     @PostMapping("/home/addContact")
     public String addFriend(@RequestParam(value = "friendMail") String friendMail, HttpServletResponse response) {
         User addFriend = userService.addFriend(friendMail);
-        logger.info("ajout de l'utisateur " + addFriend.getEmail() +" en ami");
 
         if (addFriend != null) {
             logger.info("SUCCESS - addFriend POST request - Person " + friendMail);
