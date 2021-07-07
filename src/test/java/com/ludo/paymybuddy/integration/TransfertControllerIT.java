@@ -40,7 +40,6 @@ public class TransfertControllerIT {
 
     User user1 = new User();
     BankAccount bankAccount1 = new BankAccount();
-    Transfert transfert1 = new Transfert();
 
     @BeforeEach
     public void setUp() {
@@ -92,6 +91,19 @@ public class TransfertControllerIT {
         mockMvc.perform(post("/saveSendTransfert")
                 .param("rib", "fr76123456789")
                 .param("amount", "100"))
+                .andExpect(status().is(302))
+                .andExpect(view().name("redirect:/home/transfert"))
+                .andExpect(model().hasNoErrors());
+
+    }
+
+    @Test
+    @WithMockUser("allegaertl@gmail.com")
+    public void TestPostSendTransfertPage_WithNonValidAmount() throws Exception {
+        List<Transfert> transferts = new ArrayList<>();
+        mockMvc.perform(post("/saveSendTransfert")
+                .param("rib", "fr76123456789")
+                .param("amount", "1000"))
                 .andExpect(status().is(302))
                 .andExpect(view().name("redirect:/home/transfert"))
                 .andExpect(model().hasNoErrors());

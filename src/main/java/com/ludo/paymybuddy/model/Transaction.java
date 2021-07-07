@@ -39,13 +39,4 @@ public class Transaction implements Serializable {
     @Column(name = "date_transaction")
     private LocalDate dateTransaction;
 
-    public Transaction(int id, User sender, User receiver, double taxe, double amout, LocalDate date) {
-        this.id = id;
-        this.sender = sender;
-        this.receiver = receiver;
-        this.taxe = taxe;
-        this.amount = amout;
-        this.dateTransaction = date;
-
-    }
 }

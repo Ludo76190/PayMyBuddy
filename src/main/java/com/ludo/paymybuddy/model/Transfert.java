@@ -34,8 +34,4 @@ public class Transfert {
 
     private String type;
 
-    public Transfert(Double amount, String type) {
-        this.amount = amount;
-        this.type = type;
-    }
 }
