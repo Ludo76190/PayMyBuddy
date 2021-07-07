@@ -1,6 +1,7 @@
 package com.ludo.paymybuddy.service;
 
 import com.ludo.paymybuddy.model.BankAccount;
+import com.ludo.paymybuddy.model.Transaction;
 import com.ludo.paymybuddy.model.Transfert;
 import com.ludo.paymybuddy.model.User;
 import com.ludo.paymybuddy.repository.BankAccountRepository;
@@ -9,6 +10,7 @@ import com.ludo.paymybuddy.repository.UserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -17,6 +19,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest()
@@ -75,6 +79,14 @@ public class TransfertServiceTest {
 
         listTransferts.add(transfert1);
         listTransferts.add(transfert2);
+    }
+
+    @Test
+    void testGetTransfert() {
+        List<Transfert> transferts = transfertService.findAllTransfertByBankAccountUserId(user1.getId());
+
+        assertNotNull(transferts);
+
     }
 
 }

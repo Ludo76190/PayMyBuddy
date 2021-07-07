@@ -110,6 +110,27 @@ public class UserControlerIT {
 
     @Test
     @WithMockUser("allegaertl@gmail.com")
+    public void TestAddFriendWithSameMail() throws Exception {
+        mockMvc.perform(post("/home/addContact")
+                .param("friendMail", "allegaertl@gmail.com"))
+                .andExpect(status().is(302))
+                .andExpect(view().name("redirect:/home/contact"))
+                .andExpect(model().hasNoErrors());
+    }
+
+    @Test
+    @WithMockUser("allegaertl@gmail.com")
+    public void TestAddFriendWithExistingFriend() throws Exception {
+        userService.addFriend(user2.getEmail());
+        mockMvc.perform(post("/home/addContact")
+                .param("friendMail", "alpaudrey@gmail.com"))
+                .andExpect(status().is(302))
+                .andExpect(view().name("redirect:/home/contact"))
+                .andExpect(model().hasNoErrors());
+    }
+
+    @Test
+    @WithMockUser("allegaertl@gmail.com")
     public void addFriendWithNullValueTest() throws Exception {
         mockMvc.perform(post("/home/addContact")
                 .param("friendMail", ""))
