@@ -23,12 +23,12 @@ Pay My Buddy est une application qui vous permet de transférer facilement de l'
 -   `Base de données MySQL` (version 8.0.22)
 
 ### Diagramme de classe UML
-![Diagramme de classe UML](https://.....)
+![Diagramme de classe UML](https://github.com/Ludo76190/PayMyBuddy/blob/master/UML.JPG)
 
 ### Modèle physique de données
-![Modèle physique de données](https://....)
+![Modèle physique de données](https://github.com/Ludo76190/PayMyBuddy/blob/master/model.JPG)
 
 ### Scripts SQL
-[schema.sql](http://....)
+[schema.sql](https://github.com/Ludo76190/PayMyBuddy/blob/master/src/main/resources/sql/schema.sql)
 
-[Data.sql](http://....)
+[Data.sql](https://github.com/Ludo76190/PayMyBuddy/blob/master/src/main/resources/sql/data.sql)
