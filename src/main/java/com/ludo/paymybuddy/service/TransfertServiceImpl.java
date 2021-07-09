@@ -54,12 +54,12 @@ public class TransfertServiceImpl implements TransfertService {
         transfert.setType(type);
 
         if (transfert.getType().equals("Approvisionnement")) {
-            user.setBalance(user.getBalance() + transfert.getAmount());
+            user.setBalance((double) ((int)((user.getBalance() + transfert.getAmount())*100))/100);
             logger.info("Approvisionnement du compte pour le user "+user.getId());
             userRepository.save(user);
         } else if (transfert.getType().equals("Versement") && user.getBalance() >= transfert.getAmount()) {
             logger.info("transfert d'argent vers un le compte "+ bankAccount.getRib());
-            user.setBalance(user.getBalance() - transfert.getAmount());
+            user.setBalance((double) ((int)((user.getBalance() - transfert.getAmount())*100))/100);
             userRepository.save(user);
         } else {
             logger.info("problème lors du transfert d'argent");

@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 /**
@@ -27,6 +28,7 @@ public class Transfert {
     @JoinColumn(name = "bank_account_id")
     private BankAccount bankAccount;
 
+    @NotNull
     private Double amount;
 
     @Column(name = "date_transfert")

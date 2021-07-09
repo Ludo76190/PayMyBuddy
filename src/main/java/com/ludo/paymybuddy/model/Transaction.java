@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -34,6 +35,7 @@ public class Transaction implements Serializable {
 
     private Double taxe;
 
+    @NotNull
     private Double amount;
 
     @Column(name = "date_transaction")

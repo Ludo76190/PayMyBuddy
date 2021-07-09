@@ -44,10 +44,10 @@ public class TransactionServiceImpl implements TransactionService {
 
         if (sender.getBalance() >= transaction.getAmount() + (transaction.getAmount() * Taxe.TAXE_RATE)) {
             logger.info("Sauvegarde de la transaction = "+transaction.getId());
-            receiver.setBalance(receiver.getBalance() + transaction.getAmount());
+            receiver.setBalance((double) ((int)((receiver.getBalance() + transaction.getAmount())*100))/100);
             userRepository.save(receiver);
 
-            sender.setBalance(sender.getBalance() - transaction.getAmount() - transaction.getAmount() * Taxe.TAXE_RATE);
+            sender.setBalance((double) ((int)((sender.getBalance() - transaction.getAmount() - transaction.getAmount() * Taxe.TAXE_RATE)*100))/100);
             userRepository.save(sender);
 
         } else {
