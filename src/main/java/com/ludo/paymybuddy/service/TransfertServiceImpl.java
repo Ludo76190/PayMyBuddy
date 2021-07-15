@@ -45,7 +45,8 @@ public class TransfertServiceImpl implements TransfertService {
 
         User user = userService.getCurrentUser();
 
-        BankAccount bankAccount = bankAccountRepository.findByRib(rib);
+        //BankAccount bankAccount = bankAccountRepository.findByRib(rib);
+        BankAccount bankAccount = bankAccountRepository.findByRibAndUser(rib, user);
 
         Transfert transfert = new Transfert();
         transfert.setAmount(amount);
